@@ -1,3 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
 apply plugin: 'com.android.library'
 
 android {
@@ -22,3 +36,5 @@ android {
 dependencies {
     compile 'com.google.android.gms:play-services-vision:9.6.1'
 }
+
+apply plugin: 'com.github.dcendents.android-maven'

@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -242,8 +243,23 @@ public final class BarcodeCapture extends BarcodeFragment {
     @Override
     public void onResume() {
         super.onResume();
-        startCameraSource();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                startCameraSource();
+                return null;
+            }
+        }.execute();
     }
+
+    @Override
+    public void setUserVisibleHint(boolean visible) {
+        Log.d("flo", "" + visible);
+        if (visible) {
+        } else {
+        }
+    }
+
 
     public void refresh() {
         mGraphicOverlay.setDrawRect(isShowDrawRect());
@@ -259,9 +275,15 @@ public final class BarcodeCapture extends BarcodeFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mPreview != null) {
-            mPreview.stop();
-        }
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                if (mPreview != null) {
+                    mPreview.stop();
+                }
+                return null;
+            }
+        }.execute();
     }
 
     /**
@@ -271,9 +293,15 @@ public final class BarcodeCapture extends BarcodeFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPreview != null) {
-            mPreview.release();
-        }
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                if (mPreview != null) {
+                    mPreview.release();
+                }
+                return null;
+            }
+        }.execute();
     }
 
     /**
